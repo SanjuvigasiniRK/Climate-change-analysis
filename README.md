@@ -47,6 +47,18 @@ pip install -r requirements.txt
 ```bash
 python app.py
 ```
+## Screenshots
 
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Climate Prediction
+![Prediction](screenshots/prediction.png)
+
+### AI Chatbot
+![Chatbot](screenshots/chatbot.png)
+
+### India Climate Map
+![India Map](screenshots/india_map.png)
 ## Author
 Sanju Vigasini R K
