@@ -50,7 +50,8 @@ python app.py
 ## Screenshots
 
 ### Dashboard
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard(1).png)
+![Dashboard](screenshots/dashboard(2).png)
 
 ### Climate Prediction
 ![Prediction](screenshots/prediction.png)
@@ -60,5 +61,10 @@ python app.py
 
 ### India Climate Map
 ![India Map](screenshots/india_map.png)
+
+
+### Report 
+![Report](screenshots/report.png)
+ 
 ## Author
 Sanju Vigasini R K
