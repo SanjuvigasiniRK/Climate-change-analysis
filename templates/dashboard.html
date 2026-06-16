@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Climate Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f4f4f4;
+}
+
+.main-container{
+
+width:95%;
+margin:15px auto;
+
+border-radius:30px;
+overflow:hidden;
+
+background:white;
+
+box-shadow:0 8px 25px rgba(0,0,0,0.15);
+
+animation:fadeIn 1s ease;
+}
+
+.top-banner{
+
+background:
+linear-gradient(
+rgba(0,0,0,0.4),
+rgba(0,0,0,0.4)
+),
+
+url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
+
+background-size:cover;
+background-position:center;
+
+height:300px;
+
+color:white;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+text-align:center;
+}
+
+.top-banner h1{
+
+font-size:55px;
+font-weight:bold;
+}
+
+.top-nav{
+
+display:flex;
+justify-content:center;
+
+gap:25px;
+
+padding:20px;
+
+background:white;
+}
+
+.top-nav a{
+
+text-decoration:none;
+
+color:#555;
+
+font-weight:600;
+
+transition:0.3s;
+}
+
+.top-nav a:hover{
+
+color:#000;
+
+transform:translateY(-2px);
+}
+
+.active{
+
+color:#1e3a5f !important;
+}
+
+.dashboard-content{
+
+padding:40px;
+}
+
+.stat-card{
+
+background:white;
+
+border-radius:20px;
+
+padding:25px;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+transition:0.4s;
+}
+
+.stat-card:hover{
+
+transform:translateY(-8px);
+}
+
+.stat-card h2{
+
+color:#1e3a5f;
+font-weight:bold;
+}
+
+.chart-card{
+
+background:white;
+
+border-radius:20px;
+
+padding:25px;
+
+margin-top:25px;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.chart-card h3{
+
+color:#1e3a5f;
+margin-bottom:20px;
+}
+
+.info-card{
+
+background:white;
+
+border-radius:20px;
+
+padding:25px;
+
+height:100%;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+transition:0.4s;
+}
+
+.info-card:hover{
+
+transform:translateY(-8px);
+}
+
+.footer{
+
+background:#1e3a5f;
+
+color:white;
+
+padding:40px;
+
+text-align:center;
+
+margin-top:40px;
+}
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="main-container">
+
+<div class="top-banner">
+
+<div>
+
+<h1>📊 Climate Dashboard</h1>
+
+<p>
+Real-Time Climate Analytics &
+Environmental Intelligence
+</p>
+
+</div>
+
+</div>
+
+<div class="top-nav">
+
+<a href="/">Home</a>
+
+<a href="/dashboard" class="active">
+Dashboard
+</a>
+
+<a href="/prediction">
+Prediction
+</a>
+
+<a href="/india-map">
+Risk Map
+</a>
+
+<a href="/reports">
+Reports
+</a>
+
+<a href="/admin">
+Admin
+</a>
+
+</div>
+
+<div class="dashboard-content">
+
+<div class="row g-4">
+
+<div class="col-md-6">
+
+<div class="stat-card">
+
+<h5>Total Records</h5>
+
+<h2>{{ total_records }}</h2>
+
+<p>
+Climate observations available
+for analysis.
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="stat-card">
+
+<h5>Average Temperature</h5>
+
+<h2>{{ avg_temp }} °C</h2>
+
+<p>
+Average historical temperature
+across India.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="chart-card">
+
+<h3>🌡 Temperature Trend Analysis</h3>
+
+{{ graph_html|safe }}
+
+</div>
+
+<div class="chart-card">
+
+<h3>💨 CO₂ Emissions Analysis</h3>
+
+{{ co2_graph|safe }}
+
+</div>
+
+<div class="chart-card">
+
+<h3>🔥 Correlation Heatmap</h3>
+
+<img
+src="data:image/png;base64,{{ heatmap_url }}"
+class="img-fluid rounded">
+
+</div>
+
+<div class="mt-5">
+
+<h2 class="mb-4">
+🌍 Climate Insights
+</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+
+<div class="info-card">
+
+<h4>🌡 Temperature Trend</h4>
+
+<hr>
+
+<p>
+Temperature records show a
+consistent upward trend,
+indicating climate warming.
+</p>
+
+<p>
+Expected increase by 2030:
+<b>+1.2°C</b>
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="info-card">
+
+<h4>💨 CO₂ Emissions</h4>
+
+<hr>
+
+<p>
+CO₂ emissions are rising
+steadily due to industrial
+and transportation sectors.
+</p>
+
+<p>
+Current Risk:
+<b>Moderate</b>
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="info-card">
+
+<h4>🤖 AI Forecast</h4>
+
+<hr>
+
+<p>
+Machine Learning models
+predict higher temperatures
+if emissions continue.
+</p>
+
+<p>
+Prediction Accuracy:
+<b>92%</b>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-5 text-center">
+
+<a href="/prediction"
+class="btn btn-success btn-lg me-3">
+
+🤖 Run Prediction
+
+</a>
+
+<a href="/india-map"
+class="btn btn-warning btn-lg">
+
+📍 View Risk Map
+
+</a>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+<h3>
+🌍 Climate Change Analysis &
+Prioritization System
+</h3>
+
+<br>
+
+<p>
+AI-Powered Climate Intelligence Platform
+for Monitoring Temperature Trends,
+CO₂ Emissions and Climate Risks.
+</p>
+
+<p>
+Built Using Flask, Python,
+Pandas, Plotly, Folium and
+Scikit-Learn.
+</p>
+
+<p>
+Data Sources:
+Kaggle Climate Dataset |
+Our World In Data (OWID)
+</p>
+
+<hr>
+
+<p>
+© 2026 Climate Intelligence Dashboard
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
